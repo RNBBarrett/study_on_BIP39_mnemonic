@@ -56,7 +56,7 @@ Ideally this number is large enough that it is difficult to guess and collision 
 
 *A 128-bit number has 2^128, two to the power of one hundred twenty-eight possible combinations that is 340,282,366,920,938,463,463,374,607,431,768,211,456.
 
-Step 2. Chop up our Entropy number into 11 bits long:
+Step 2. Chop up our Entropy number into sections 11 bits long:
 --------------------------------------------------------------
 
 Now we need to chop up our binary number into sections 11 bits long.
