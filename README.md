@@ -12,18 +12,18 @@ A seed phrase is an ordered set of 12-24 words used to generate a memorable phra
 In general seed phrases follow the Bitcoin Improvement Proposal (BIP 39) standard found here:
 https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 
-The words in the seed phrase is constructed from the the 2048 words in the BIP39 word list found here:
+The words in the seed phrase are constructed from a range of 12 to 24 of the 2048 words found here:
 https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
 
-NOTE!!! - The order of these words matters. This is an ordered list. When seed phrases are made, words are selected from the number of their position in the list!
+NOTE!!! - The order of these words matters. This is an ordered list. When seed phrases are made, words are selected from the number of their position in the list! 
 
-Many hackers try and bruteforce the bitcoin wallet recovery phrase by randomly selecting combinations of 12-24 words from the list and spraying these against a wallet app. This often results in a high rate of error given the method in which valid seed phrases must be constructed.
+You cannot randomly select a list of 12-24 words. An initial 128-256 bit binary number is used to generate the first 11 words in a 12 word seed phrase, or the first 23 words in a 24 word seed phrase.
 
-The LAST word in the seed phrase is ALWAYS constructed from the previous words. 
+The LAST word in the seed phrase is ALWAYS constructed from generating a partial checksum of the final words.
+
 Lets review the method by which valid seed phrases are generated...
 
 ### Step 1. Generate a random binary entropy number between 128-256 bits long: ###
-
 
 To generate our seed phrase we need a binary number, a number consisting of only 0s and 1s. Each 1 or 0 is known as a bit.
 
@@ -252,6 +252,9 @@ That means we would want to iterate through all those binary numbers, generate a
 
 Bitcoin address generation will form the next part of my learning, since every wallet seems to generate bitcoin addresses from seed phrases slightly differently.
 
+In our python file I will focus on generating a 12 word seed phrase and will consolidate much of our code into a method generate_bip39_seed() which will recieve a our binary number 128 bits long, it will then return a list containing our 12 word seed phrase.
+
+This function will later be reused in further learnings to generate private keys, public keys and bitcoin addresses using studies on these various means.
 
 
 
