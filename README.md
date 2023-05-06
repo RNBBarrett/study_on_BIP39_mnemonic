@@ -16,9 +16,8 @@ NOTE!!! - The order of these words matters. This is an ordered list. When seed p
 
 Many hackers try and bruteforce the bitcoin wallet recovery phrase by randomly selecting combinations of 12-24 words from the list and spraying these against a wallet app. This often results in a high rate of error given the method in which valid seed phrases must be constructed.
 
-The LAST word in the seed phrase is ALWAYS constructed from the previous words.
-
-Lets review the method by which valid seed phrases are generated.
+The LAST word in the seed phrase is ALWAYS constructed from the previous words. 
+Lets review the method by which valid seed phrases are generated...
 
 Step 1. Entropy. Generate a random binary number between 128-256 bits long.
 -----------------------------------------------------------------------------
@@ -27,7 +26,7 @@ To generate our seed phrase we need a binary number, a number consisting of only
 
 We will generate a large random number that will then be used to select our seed words. 
 
-The BIP39 standard states that the random number we generate should be 128 bits long for a 12 word seed phrase, up to 256 bits long for a 24 word seed phrase.
+The BIP39 standard states that the random number we generate should be 128 bits long for a 12 word seed phrase, up to 256 bits long for a 24 word seed phrase. Lets focus on a 12 word seed phrase as an example.
 
 Using Python lets write a function to do this (note in the real world we should avoid the use of the random library, because generally they are not always truly random):
 
@@ -44,32 +43,30 @@ def generate_random_binary(length):
 random_binary = generate_random_binary(128)
 print(random_binary)
 ```
+When running our example this resulted in a random binary number 128 bits long. That's 128 individual 0s 1s making up our number. 
+01100000011111100011001001111101100111101001110001110001001001011010000110010110100110001100111111011011010100111011010001011110
+<img width="918" alt="Screenshot 2023-05-06 at 12 08 39 PM" src="https://user-images.githubusercontent.com/46794084/236634982-237cedd7-99a0-48bc-a9d0-391783b93d67.png">
 
-Lets focus on a 12 word seed phrase as an example.
+Helpful Facts:
+You will hear the term entropy used when referring to this, it just means we generated a random number. 
+Ideally this number is large enough that it is difficult to guess and collision are unlikely to occur when reselecting that number.  
 
-Here is a 128 bit binary number. That is 128 individual 0s 1s in a row making up our random binary number.
-11011010010000101100101111001001110010000111111000010010100000001100001101001100101001011110011111001000010001010110000101111111
+*Interesting fact a 128-bit number has 2^128, two to the power of one hundred twenty-eight possible combinations or 340,282,366,920,938,463,463,374,607,431,768,211,456.
 
-You will hear the term entropy used when referring to this, it just means we generated a random number. Ideally this number is large enough that it is difficult to guess and collision are unlikely to occur when reselecting that number. A 128-bit number has 2^128, two to the power of one hundred twenty-eight possible combinations or 340,282,366,920,938,463,463,374,607,431,768,211,456.
+Step 2. Selecting words using our entropy number
+--------------------------------------------------
 
-Selecting words using entropy
------------------------------
-Now remember our BIP39 wordlist consisting of 2048 words.
+Now we need to chop up our binary number into sections 11 bits long.
+*In binary a number 11 bits long will convert to any decimal number between 1 and 2048. Keep that in mind for use in selecting our words here in a minute.
 
-Each word is represented by a number according to its order in the list. Let me restate that - each word is represented by a number according to its order in the list.
+```
+sections = [random_binary[i:i+11] for i in range(0, len(random_binary), 11)]
+print(sections)
+```
+This results in the following dictionary (we use a dictionary because we are going to be inserting the words corresponding the binary numbers here in a second.
 
-Number 1 is abandon
-Number 2 is ability
-Number 3 is able
-...
-Number 2048 is zoo
+<img width="201" alt="Screenshot 2023-05-06 at 11 14 05 AM" src="https://user-images.githubusercontent.com/46794084/236632821-d3fff079-947f-43bd-ab3c-48eb26a85330.png">
 
-Now we have a list of numbers from 1 to 2048 and we want to select our first 11 words from the list so we can calculate our last word, the partial checksum.
-
-First we chop our entropy number: 11011010010000101100101111001001110010000111111000010010100000001100001101001100101001011110011111001000010001010110000101111111
-In binary a number 11 bits long will convert to any decimal number between 1 and 2048.
-
-So next lets cut up our binary number into sections consisting of 11 bits (11 O's and 1's):
 11011010010, 00010110010, 11110010011, 10010000111, 11100001001, 01000000011, 00001101001, 10010100101, 11100111110, 01000010001, 01011000010, 1111111
 
 We must now convert each set of 11 bits to a binary number between 1 and 2048:
