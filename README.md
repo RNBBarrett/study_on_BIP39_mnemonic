@@ -1,4 +1,5 @@
 ### Study_BIP39_SeedPhrases ###
+-------------------------------
 
 This readme consists of notes from a personal study on constructing valid BIP39 seed phrases for use in Bitcoin wallet recovery.
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
@@ -55,8 +56,7 @@ Ideally this number is large enough that it is difficult to guess and collision 
 
 *A 128-bit number has 2^128, two to the power of one hundred twenty-eight possible combinations that is 340,282,366,920,938,463,463,374,607,431,768,211,456.
 
-Step 2. Chop up our Entropy number into sections 11 bits long:
---------------------------------------------------------------
+### Step 2. Chop up our Entropy number into sections 11 bits long: ###
 
 Now we need to chop up our binary number into sections 11 bits long.
 *In binary a number 11 bits long will convert to any decimal number between 1 and 2048. Keep that in mind for use in selecting our words here in a minute.
@@ -72,8 +72,7 @@ This results in the following list of binary numbers 11 bits long, with the exce
 
 Notice that the last set of bits in our list is not a full 11 bits long. That last entry is special, we are going to save that for our last step.
 
-Step 3. Convert each set of bits into its decimal equivalent:
-------------------------------------------------------------
+### Step 3. Convert each set of bits into its decimal equivalent: ###
 
 We must now convert each set of 11 bits to a binary number between 1 and 2047. 
 
@@ -103,15 +102,13 @@ The results look like this:
 
 Ok we almost have the index of the words we need from the BIP39 word list but two more steps. We need to deal with that last set of binary numbers thats only 7 bits long, thats in the next step...
 
-Step 4. Calculate the 12th binary number:
-------------------------------------------
+### Step 4. Calculate the 12th binary number: ###
 
 How do we get the last 4 bits to make it into 11 bits for the binary number at position 11 in the list?
 
 This step is broken down into a numer of sub-steps as follows...
 
-###Sub-step 4.a Generate Sha-256 hash from original 128-bit binary
----------------------------------------------------------------
+#### Sub-step 4.a Generate Sha-256 hash from original 128-bit binary ####
 
 First we take our original entropy number those 128-bits and we run it through the sha-256 hash algorithm.
 
@@ -129,8 +126,7 @@ print(sha_result)
 The sha-256 hash algorithm resulted in the hexadecimal:
 f2cead8ce695e058ca4d2e3d04d53aaf5c9365606c651368041a4cea87fae31b
 
-###Sub-step 4.b Convert first character of our sha-256 hash to 4-bit binary
-------------------------------------------------------------------------
+#### Sub-step 4.b Convert first character of our sha-256 hash to 4-bit binary ####
 
 Taking the first character "f" we convert this back to 4 bit binary.
 
@@ -147,8 +143,7 @@ print(four_bit_number)
 The result for character "f" is:
 1111
 
-###Sub-step 4.c Construct our 12th decimal number
-----------------------------------------------
+#### Sub-step 4.c Construct our 12th decimal number ####
 
 Remember split our binary numbers up into 11-bit blocks and placed them in a list, but we were left with those 7 binary numbers in the 11th place on our list:
 
@@ -180,8 +175,8 @@ This final result comes up with our complete list of decimal numbers, the first 
 
 [771, 1932, 1275, 489, 1592, 1174, 1074, 1688, 1662, 1748, 1896, 1519]
 
-###Sub-step 4.d Getting positional numbers
----------------------------------------
+#### Sub-step 4.d Getting positional numbers ####
+
 
 But wait one more piece, since we since representing each 11 bits as a number between 0 and 2047 and the BIP39 wordlist starts at 1 instead of 0) we must add one to each number to get its positional number.
 
@@ -201,8 +196,8 @@ Becomes:
 
 Make a cup of coffee its time for our final step!
 
-Step 5. Final step - go grab words from the BIP39 wordlist!
------------------------------------------------------------
+### Step 5. Final step - go grab words from the BIP39 wordlist! ###
+
 This step is very straightforward.
 
 Grab the BIP39 wordlist from here, save it in raw format to a file named bip39.txt:
@@ -246,8 +241,8 @@ In our case we generated:
 Finally we can proove we got a valid seed phrase by generating a bitcoin address using the Ian Coleman's excellent Menomic Code Coverter at:
 https://iancoleman.io/bip39/
 
-Conclusions
------------
+### Conclusions ###
+-------------------
 
 Since in order to generate a seed phrase we need a 128-256 bit long number to start with, in order to bruteforce wallet addresses attackers would need to go through all possible combinations of bits between 128-256 bits.
 
