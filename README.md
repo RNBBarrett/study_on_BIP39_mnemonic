@@ -1,4 +1,4 @@
-# Study_BIP39_SeedPhrases
+## Study_BIP39_SeedPhrases ##
 
 This readme consists of notes from a personal study on constructing valid BIP39 seed phrases for use in Bitcoin wallet recovery.
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
