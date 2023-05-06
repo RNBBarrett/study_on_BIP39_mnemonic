@@ -4,8 +4,8 @@ This readme consists of notes from a personal study on constructing valid BIP39 
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
 and give them full credit for their detailed explaination which exists in few places online.
 
-#Intro
-------
+## Intro ##
+
 
 A seed phrase is an ordered set of 12-24 words used to generate a memorable phrase used for Bitcoin wallet recovery.
 
