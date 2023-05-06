@@ -4,7 +4,7 @@ This readme consists of notes from a personal study on constructing valid BIP39 
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
 and give them full credit for their detailed explaination which exists in few places online.
 
-Intro
+#Intro
 ------
 
 A seed phrase is an ordered set of 12-24 words used to generate a memorable phrase used for Bitcoin wallet recovery.
@@ -22,7 +22,7 @@ Many hackers try and bruteforce the bitcoin wallet recovery phrase by randomly s
 The LAST word in the seed phrase is ALWAYS constructed from the previous words. 
 Lets review the method by which valid seed phrases are generated...
 
-Step 1. Generate a random binary entropy number between 128-256 bits long:
+#Step 1. Generate a random binary entropy number between 128-256 bits long:
 --------------------------------------------------------------------------
 
 To generate our seed phrase we need a binary number, a number consisting of only 0s and 1s. Each 1 or 0 is known as a bit.
@@ -111,7 +111,7 @@ How do we get the last 4 bits to make it into 11 bits for the binary number at p
 
 This step is broken down into a numer of sub-steps as follows...
 
-Sub-step 4.a Generate Sha-256 hash from original 128-bit binary
+###Sub-step 4.a Generate Sha-256 hash from original 128-bit binary
 ---------------------------------------------------------------
 
 First we take our original entropy number those 128-bits and we run it through the sha-256 hash algorithm.
@@ -130,7 +130,7 @@ print(sha_result)
 The sha-256 hash algorithm resulted in the hexadecimal:
 f2cead8ce695e058ca4d2e3d04d53aaf5c9365606c651368041a4cea87fae31b
 
-Sub-step 4.b Convert first character of our sha-256 hash to 4-bit binary
+###Sub-step 4.b Convert first character of our sha-256 hash to 4-bit binary
 ------------------------------------------------------------------------
 
 Taking the first character "f" we convert this back to 4 bit binary.
@@ -148,7 +148,7 @@ print(four_bit_number)
 The result for character "f" is:
 1111
 
-Sub-step 4.c Construct our 12th decimal number
+###Sub-step 4.c Construct our 12th decimal number
 ----------------------------------------------
 
 Remember split our binary numbers up into 11-bit blocks and placed them in a list, but we were left with those 7 binary numbers in the 11th place on our list:
@@ -181,7 +181,7 @@ This final result comes up with our complete list of decimal numbers, the first 
 
 [771, 1932, 1275, 489, 1592, 1174, 1074, 1688, 1662, 1748, 1896, 1519]
 
-Sub-step 4.d Getting positional numbers
+###Sub-step 4.d Getting positional numbers
 ---------------------------------------
 
 But wait one more piece, since we since representing each 11 bits as a number between 0 and 2047 and the BIP39 wordlist starts at 1 instead of 0) we must add one to each number to get its positional number.
