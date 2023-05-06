@@ -1,11 +1,10 @@
-## Study_BIP39_SeedPhrases ##
+### Study_BIP39_SeedPhrases ###
 
 This readme consists of notes from a personal study on constructing valid BIP39 seed phrases for use in Bitcoin wallet recovery.
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
 and give them full credit for their detailed explaination which exists in few places online.
 
-## Intro ##
-
+### Intro ###
 
 A seed phrase is an ordered set of 12-24 words used to generate a memorable phrase used for Bitcoin wallet recovery.
 
@@ -22,8 +21,8 @@ Many hackers try and bruteforce the bitcoin wallet recovery phrase by randomly s
 The LAST word in the seed phrase is ALWAYS constructed from the previous words. 
 Lets review the method by which valid seed phrases are generated...
 
-#Step 1. Generate a random binary entropy number between 128-256 bits long:
---------------------------------------------------------------------------
+### Step 1. Generate a random binary entropy number between 128-256 bits long: ###
+
 
 To generate our seed phrase we need a binary number, a number consisting of only 0s and 1s. Each 1 or 0 is known as a bit.
 
