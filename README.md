@@ -252,7 +252,7 @@ On top of this there are various ways to derive a bitcoin address from the initi
 
 The python file included in this repo consolidates much of the code in the examples and enables someone testing to generate a binary number and then pass this into a function to generate the seed. 
 
-That concludes this investigation.
+Just run the included pytthon file to generate a randmom binary numnber and resulting seed phrase.
 
 
 
