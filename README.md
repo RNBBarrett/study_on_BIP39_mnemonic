@@ -125,6 +125,7 @@ print(sha_result)
 
 The sha-256 hash algorithm resulted in the hexadecimal:
 f2cead8ce695e058ca4d2e3d04d53aaf5c9365606c651368041a4cea87fae31b
+```
 
 ### Sub-step 4.b Convert first character of our sha-256 hash to 4-bit binary ###
 
@@ -176,7 +177,6 @@ This final result comes up with our complete list of decimal numbers, the first 
 [771, 1932, 1275, 489, 1592, 1174, 1074, 1688, 1662, 1748, 1896, 1519]
 
 #### Sub-step 4.d Getting positional numbers ####
-
 
 But wait one more piece, since we since representing each 11 bits as a number between 0 and 2047 and the BIP39 wordlist starts at 1 instead of 0) we must add one to each number to get its positional number.
 
