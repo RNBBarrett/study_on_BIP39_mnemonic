@@ -1,5 +1,4 @@
 ## Study_BIP39_SeedPhrases ##
-------------------------------
 
 This readme consists of notes from a personal study on constructing valid BIP39 seed phrases for use in Bitcoin wallet recovery.
 I have learned much of this material from: https://www.blockplate.com/blogs/blockplate/how-a-seed-phrase-is-created
@@ -244,7 +243,6 @@ Finally we can proove we got a valid seed phrase by generating a bitcoin address
 https://iancoleman.io/bip39/
 
 ## Conclusions ##
--------------------
 
 Since in order to generate a seed phrase we need a 128-256 bit long number to start with, in order to bruteforce wallet addresses attackers would need to go through all possible combinations of bits between 128-256 bits.
 
