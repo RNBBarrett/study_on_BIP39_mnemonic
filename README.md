@@ -244,17 +244,15 @@ https://iancoleman.io/bip39/
 
 ## Conclusions ##
 
-Since in order to generate a seed phrase we need a 128-256 bit long number to start with, in order to bruteforce wallet addresses attackers would need to go through all possible combinations of bits between 128-256 bits.
+As we need to generate a 128-256 bit number to make our seed phrase, the only way to reasonably bruteforce a wallet would be to generate all possible combinations of that initial binary number.
 
-If we focus on 12 word seed phrases alone we have said that our 128-bit number can have 2^128 or 340,282,366,920,938,463,463,374,607,431,768,211,456 possible combinations.
+If we focus on 12 word seed phrases alone we have said that our 128-bit number can have 2^128 or 340,282,366,920,938,463,463,374,607,431,768,211,456 possible combinations. That's a lot of numbers to check.
 
-That means we would want to iterate through all those binary numbers, generate a seed phrase and then turn it into a bitcoin address. 
+On top of this there are various ways to derive a bitcoin address from the initial seed. These methods will make up part of my next investigation.
 
-Bitcoin address generation will form the next part of my learning, since every wallet seems to generate bitcoin addresses from seed phrases slightly differently.
+The python file included in this repo consolidates much of the code in the examples and enables someone testing to generate a binary number and then pass this into a function to generate the seed. 
 
-In our python file I will focus on generating a 12 word seed phrase and will consolidate much of our code into a method generate_bip39_seed() which will recieve a our binary number 128 bits long, it will then return a list containing our 12 word seed phrase.
-
-This function will later be reused in further learnings to generate private keys, public keys and bitcoin addresses using studies on these various means.
+That concludes this investigation.
 
 
 
